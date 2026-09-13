@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initPhotoSwitcher();
   initProjectFilters();
   initModals();
+  initResumeSwitcher();
+  initDocViewer();
   initResumeUploader();
   initCardGlow();
   initCopyButtons();
@@ -365,6 +367,16 @@ function initModals() {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+
+    // Stop videos or audio inside modals when closed
+    const iframes = modal.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+      const currentSrc = iframe.src;
+      iframe.src = '';
+      if (!modal.id.includes('cert-viewer')) {
+        iframe.src = currentSrc;
+      }
+    });
   }
 }
 
@@ -656,5 +668,102 @@ function initCardGlow() {
     });
   });
 }
+
+/* --------------------------------------------------------------------------
+   14. Resume View Switcher (Clean Digital CV vs Scanned Document)
+   -------------------------------------------------------------------------- */
+function initResumeSwitcher() {
+  const btnClean = document.getElementById('btn-mode-clean');
+  const btnScan = document.getElementById('btn-mode-scan');
+  const cleanSheet = document.getElementById('clean-resume-sheet');
+  const scanSheet = document.getElementById('scan-resume-sheet');
+  const toggleUploadBtn = document.getElementById('toggle-resume-upload-btn');
+  const uploadDrawer = document.getElementById('resume-upload-drawer');
+
+  if (btnClean && btnScan && cleanSheet && scanSheet) {
+    btnClean.addEventListener('click', () => {
+      btnClean.classList.add('active');
+      btnScan.classList.remove('active');
+      cleanSheet.style.display = 'block';
+      scanSheet.style.display = 'none';
+      showToast('Viewing Clean Digital CV');
+    });
+
+    btnScan.addEventListener('click', () => {
+      btnScan.classList.add('active');
+      btnClean.classList.remove('active');
+      cleanSheet.style.display = 'none';
+      scanSheet.style.display = 'block';
+      showToast('Viewing Scanned Document & Uploader');
+    });
+  }
+
+  // If user clicks "Upload Custom", auto-switch to scan sheet if not visible
+  if (toggleUploadBtn && btnScan) {
+    toggleUploadBtn.addEventListener('click', () => {
+      if (cleanSheet && cleanSheet.style.display !== 'none') {
+        btnScan.click();
+      }
+      if (uploadDrawer && !uploadDrawer.classList.contains('open')) {
+        uploadDrawer.classList.add('open');
+      }
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. Document & Certificate Viewer Modal Handler
+   -------------------------------------------------------------------------- */
+function initDocViewer() {
+  const viewBtns = document.querySelectorAll('.cert-view-btn, .marksheet-view-btn, .doc-view-btn');
+  const modal = document.getElementById('cert-viewer-modal');
+  const iframe = document.getElementById('cert-pdf-iframe');
+  const titleElem = document.getElementById('cert-viewer-title');
+  const subtitleElem = document.getElementById('cert-viewer-subtitle');
+  const downloadLink = document.getElementById('cert-download-link');
+  const openTabLink = document.getElementById('cert-open-tab-link');
+  const credlyLink = document.getElementById('cert-credly-link');
+
+  if (!modal) return;
+
+  viewBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const docUrl = btn.getAttribute('data-pdf') || btn.getAttribute('data-doc') || '';
+      const title = btn.getAttribute('data-title') || 'Official Document';
+      const org = btn.getAttribute('data-org') || 'Verified Credential';
+      const credly = btn.getAttribute('data-credly') || '';
+
+      if (titleElem) titleElem.textContent = title;
+      if (subtitleElem) subtitleElem.textContent = org;
+      if (iframe) iframe.src = docUrl;
+
+      if (downloadLink) {
+        downloadLink.href = docUrl;
+        const filename = docUrl.split('/').pop() || 'document.pdf';
+        downloadLink.setAttribute('download', filename);
+      }
+
+      if (openTabLink) {
+        openTabLink.href = docUrl;
+      }
+
+      if (credlyLink) {
+        if (credly) {
+          credlyLink.href = credly;
+          credlyLink.style.display = 'inline-flex';
+        } else {
+          credlyLink.style.display = 'none';
+        }
+      }
+
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      showToast(`Opening ${title}`);
+    });
+  });
+}
+
 
 
