@@ -126,11 +126,11 @@ function initTypewriter() {
   if (!typewriterElem) return;
 
   const roles = [
-    'IoT & Cybersecurity Specialist',
-    'Front-End Web Developer',
-    'B.Tech Student (IoT & Blockchain)',
-    'Problem Solver & C++ Programmer',
-    'TCS Ninja Select Candidate'
+    'CS-IoT Undergraduate (GGITS ’27)',
+    'C++ & React.js Developer',
+    'Cloud & AI Solutions Enthusiast',
+    'Passionate Fitness Coach & Athlete',
+    'TCS Ninja Placed Candidate'
   ];
 
   let roleIdx = 0;
