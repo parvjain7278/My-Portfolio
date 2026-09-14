@@ -616,6 +616,69 @@ code {
   background: rgba(56, 189, 248, 0.08);
 }
 
+/* Gmail Highlight Pill in Hero */
+.info-tag.gmail-highlight-pill {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.15));
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #fecaca;
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.22);
+  gap: 0.55rem;
+  transition: all var(--transition-normal);
+}
+
+.info-tag.gmail-highlight-pill i {
+  color: #f87171;
+}
+
+.info-tag.gmail-highlight-pill .gmail-text {
+  letter-spacing: 0.2px;
+}
+
+[data-theme="light"] .info-tag.gmail-highlight-pill {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.1));
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  color: #b91c1c;
+}
+
+[data-theme="light"] .info-tag.gmail-highlight-pill i {
+  color: #dc2626;
+}
+
+.info-tag.gmail-highlight-pill:hover {
+  border-color: #ef4444;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.28), rgba(245, 158, 11, 0.25));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 22px rgba(239, 68, 68, 0.45);
+}
+
+.gmail-badge {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #fca5a5;
+}
+
+[data-theme="light"] .gmail-badge {
+  color: #991b1b;
+  background: rgba(239, 68, 68, 0.18);
+}
+
+.gmail-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse-glow 1.5s infinite;
+  display: inline-block;
+}
+
 .hero-cta-group {
   display: flex;
   flex-wrap: wrap;
@@ -759,21 +822,85 @@ code {
   transform: translateY(0);
 }
 
-/* Photo Switcher Bar */
-.photo-switcher-bar {
+/* Photo Switcher Container & Auto-Swap */
+.photo-switcher-container {
   position: absolute;
-  bottom: -48px;
+  bottom: -66px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 0.5rem;
-  background: var(--bg-surface);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-glass);
-  padding: 0.35rem;
-  border-radius: var(--radius-full);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
   z-index: 10;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.auto-swap-indicator-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.auto-swap-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.18rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+
+.auto-swap-pill.active {
+  background: rgba(14, 165, 233, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+}
+
+.auto-swap-pill.chosen {
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #34d399;
+}
+
+.auto-swap-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.resume-hint {
+  font-size: 0.65rem;
+  opacity: 0.85;
+  text-decoration: underline;
+  margin-left: 0.2rem;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  box-shadow: 0 0 6px currentColor;
+  animation: pulse-glow 1.5s infinite;
+}
+
+.photo-switcher-bar {
+  display: flex;
+  gap: 0.35rem;
+  background: var(--bg-surface);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  padding: 0.3rem 0.45rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
 }
 
@@ -1724,6 +1851,128 @@ code {
   border-color: var(--accent-cyan);
   color: var(--accent-cyan);
   transform: scale(1.08);
+}
+
+/* Featured Gmail Card in Contact Section */
+.channel-card.gmail-featured-card {
+  border-color: rgba(239, 68, 68, 0.45);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(15, 23, 42, 0.65));
+  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="light"] .channel-card.gmail-featured-card {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.06), rgba(255, 255, 255, 0.85));
+  border-color: rgba(220, 38, 38, 0.35);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.1);
+}
+
+.channel-card.gmail-featured-card::before {
+  content: "PRIMARY CONTACT";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ff8a8a;
+}
+
+[data-theme="light"] .channel-card.gmail-featured-card::before {
+  color: #b91c1c;
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.channel-icon.gmail-icon {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+[data-theme="light"] .channel-icon.gmail-icon {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+.channel-label-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.channel-label-row h4 {
+  margin-bottom: 0;
+}
+
+.gmail-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.channel-link.highlighted-email {
+  color: #fca5a5;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: all var(--transition-fast);
+}
+
+[data-theme="light"] .channel-link.highlighted-email {
+  color: #b91c1c;
+}
+
+.channel-link.highlighted-email:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+[data-theme="light"] .channel-link.highlighted-email:hover {
+  color: #991b1b;
+}
+
+.copy-btn.highlighted-copy {
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+.copy-btn.highlighted-copy:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+/* Resume Gmail Highlight */
+.r-gmail-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(239, 68, 68, 0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #dc2626;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .r-gmail-highlight {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.45);
 }
 
 /* Contact Form */

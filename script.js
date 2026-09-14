@@ -262,34 +262,118 @@ function initPhotoSwitcher() {
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxTitle = document.getElementById('lightbox-title');
   const lightboxSubtitle = document.getElementById('lightbox-subtitle');
+  const autoSwapPill = document.getElementById('auto-swap-pill');
+  const autoSwapLabel = document.getElementById('auto-swap-label');
 
+  let isUserChosen = false;
+  let autoSwapTimer = null;
+  let currentTarget = 'ncc'; // starts at ncc, will swap to formal, then ncc...
+
+  function applyPhoto(btn, isAuto = false) {
+    if (!btn || !mainImg) return;
+
+    // Update active class on hero switcher buttons
+    const heroSwitcherBtns = document.querySelectorAll('.photo-switcher-bar .photo-switch-btn');
+    heroSwitcherBtns.forEach(b => b.classList.remove('active'));
+    if (btn.classList.contains('photo-switch-btn')) {
+      btn.classList.add('active');
+    }
+
+    const src = btn.getAttribute('data-src');
+    const pos = btn.getAttribute('data-pos') || 'center center';
+    const caption = btn.getAttribute('data-caption') || 'Parv Jain';
+    const isNcc = src.includes('profile.jpg') || src.includes('profile_ncc');
+
+    // Smooth fade and slight zoom transition
+    mainImg.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    mainImg.style.opacity = '0.2';
+    mainImg.style.transform = 'scale(0.985)';
+
+    setTimeout(() => {
+      mainImg.src = src;
+      mainImg.style.objectPosition = pos;
+      mainImg.style.opacity = '1';
+      mainImg.style.transform = 'scale(1)';
+    }, 130);
+
+    if (lightboxImg) lightboxImg.src = src;
+    if (lightboxTitle) lightboxTitle.textContent = isNcc ? 'Parv Jain - NCC Senior Cadet' : 'Parv Jain - Professional Portrait';
+    if (lightboxSubtitle) lightboxSubtitle.textContent = caption;
+
+    if (isAuto && autoSwapLabel) {
+      const btnName = btn.textContent.trim();
+      autoSwapLabel.innerHTML = `<i class="fa-solid fa-arrows-rotate fa-spin"></i> Auto-Swapping • <strong>${btnName}</strong>`;
+    }
+  }
+
+  function startAutoSwap() {
+    if (autoSwapTimer) clearInterval(autoSwapTimer);
+
+    autoSwapTimer = setInterval(() => {
+      if (isUserChosen) {
+        clearInterval(autoSwapTimer);
+        autoSwapTimer = null;
+        return;
+      }
+
+      // Alternate between formal and ncc
+      currentTarget = currentTarget === 'ncc' ? 'formal' : 'ncc';
+      const targetBtn = currentTarget === 'formal'
+        ? document.getElementById('btn-photo-formal')
+        : document.getElementById('btn-photo-ncc');
+
+      if (targetBtn) {
+        applyPhoto(targetBtn, true);
+      }
+    }, 3200);
+  }
+
+  // Attach click listener to all photo switch buttons
   switchBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      switchBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
 
-      const src = btn.getAttribute('data-src');
-      const pos = btn.getAttribute('data-pos') || 'center center';
-      const caption = btn.getAttribute('data-caption') || 'Parv Jain';
-      const isNcc = src.includes('profile.jpg') || src.includes('profile_ncc');
-
-      if (mainImg) {
-        mainImg.style.opacity = '0.3';
-        setTimeout(() => {
-          mainImg.src = src;
-          mainImg.style.objectPosition = pos;
-          mainImg.style.opacity = '1';
-        }, 150);
+      // User explicitly clicked a photo -> Stop auto-swap!
+      isUserChosen = true;
+      if (autoSwapTimer) {
+        clearInterval(autoSwapTimer);
+        autoSwapTimer = null;
       }
 
-      if (lightboxImg) lightboxImg.src = src;
-      if (lightboxTitle) lightboxTitle.textContent = isNcc ? 'Parv Jain - NCC Senior Cadet' : 'Parv Jain - Professional Portrait';
-      if (lightboxSubtitle) lightboxSubtitle.textContent = caption;
+      applyPhoto(btn, false);
 
-      showToast(`Viewing ${btn.textContent.trim()}`);
+      // Update indicator to show user's choice has locked the selection
+      if (autoSwapPill) {
+        autoSwapPill.classList.remove('active');
+        autoSwapPill.classList.add('chosen');
+        autoSwapPill.title = 'Photo chosen! Click here if you want to resume auto-swap.';
+      }
+      if (autoSwapLabel) {
+        const btnName = btn.textContent.trim();
+        autoSwapLabel.innerHTML = `<i class="fa-solid fa-circle-check"></i> Chosen: <strong>${btnName}</strong> <span class="resume-hint">(Click to auto-swap)</span>`;
+      }
+
+      showToast(`Selected ${btn.textContent.trim()} photo (Auto-swap paused)`);
     });
   });
+
+  // Clicking the auto-swap pill resumes auto-swap if paused
+  if (autoSwapPill) {
+    autoSwapPill.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isUserChosen) {
+        isUserChosen = false;
+        autoSwapPill.classList.remove('chosen');
+        autoSwapPill.classList.add('active');
+        autoSwapPill.title = 'Auto-swapping between Formal & NCC until chosen. Click any photo button to choose!';
+        if (autoSwapLabel) {
+          autoSwapLabel.innerHTML = `<i class="fa-solid fa-arrows-rotate fa-spin"></i> Auto-Swapping (Formal ↔ NCC)`;
+        }
+        startAutoSwap();
+        showToast('Auto-swap resumed between Formal & NCC');
+      }
+    });
+  }
 
   if (profileCard && photoModal) {
     profileCard.addEventListener('click', () => {
@@ -298,6 +382,9 @@ function initPhotoSwitcher() {
       document.body.style.overflow = 'hidden';
     });
   }
+
+  // Start auto-swapping immediately on page load
+  startAutoSwap();
 }
 
 /* --------------------------------------------------------------------------

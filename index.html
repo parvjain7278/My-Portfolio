@@ -94,7 +94,7 @@
             <span class="separator">•</span>
             <span class="status-text">Placed in <strong>TCS (Ninja Profile)</strong></span>
             <span class="separator">•</span>
-            <span class="status-sub"><strong>CSE (IoT) 2022–2027</strong></span>
+            <span class="status-sub"><strong>CSE (IoT) 2023–2027</strong></span>
           </div>
 
           <h1 class="hero-title">
@@ -109,7 +109,7 @@
           </div>
 
           <p class="hero-description">
-            B.Tech in <strong>Computer Science & Engineering (IoT, Cybersecurity & Blockchain)</strong> at Gyan Ganga Institute of Science & Technology (<strong>Batch 2022 – 2027</strong>). <strong>Open to Work</strong> and eager to engineer high-impact solutions across Front-End Development, real-time Computer Vision, and secure IoT networks. Placed at <strong>TCS Ninja</strong>.
+            B.Tech in <strong>Computer Science & Engineering (IoT, Cybersecurity & Blockchain)</strong> at Gyan Ganga Institute of Science & Technology (<strong>Batch 2023 – 2027</strong>). <strong>Open to Work</strong> and eager to engineer high-impact solutions across Front-End Development, real-time Computer Vision, and secure IoT networks. Placed at <strong>TCS Ninja</strong>.
           </p>
 
           <!-- Contact / Location quick badges -->
@@ -117,8 +117,11 @@
             <span class="info-tag">
               <i class="fa-solid fa-location-dot"></i> Jabalpur, MP, India
             </span>
-            <a href="mailto:parvjain123789@gmail.com" class="info-tag hoverable">
-              <i class="fa-solid fa-envelope"></i> parvjain123789@gmail.com
+            <a href="mailto:parvjain123789@gmail.com" class="info-tag hoverable gmail-highlight-pill" title="Send direct email to Parv Jain">
+              <span class="gmail-live-dot"></span>
+              <i class="fa-solid fa-envelope"></i>
+              <span class="gmail-text">parvjain123789@gmail.com</span>
+              <span class="gmail-badge">Direct Mail</span>
             </a>
             <a href="tel:+917389414941" class="info-tag hoverable">
               <i class="fa-solid fa-phone"></i> +91 7389414941
@@ -174,17 +177,27 @@
               </div>
             </div>
 
-            <!-- Photo Switcher Control -->
-            <div class="photo-switcher-bar">
-              <button class="photo-switch-btn active" data-src="assets/profile.jpg" data-pos="center 65%" data-caption="Parv Jain - National Cadet Corps (NCC) Senior Cadet Ceremony">
-                <i class="fa-solid fa-medal"></i> NCC Cadet
-              </button>
-              <button class="photo-switch-btn" data-src="assets/profile_formal.jpg" data-pos="top center" data-caption="Parv Jain - Professional Studio Portrait">
-                <i class="fa-solid fa-user-tie"></i> Formal
-              </button>
-              <button class="photo-switch-btn" data-src="assets/profile_white_bg.png" data-pos="center 20%" data-caption="Parv Jain - Clean Studio Portrait (White BG)">
-                <i class="fa-solid fa-id-badge"></i> Studio
-              </button>
+            <!-- Photo Switcher Control with Auto-Swap -->
+            <div class="photo-switcher-container">
+              <div class="auto-swap-indicator-wrap">
+                <span class="auto-swap-pill active" id="auto-swap-pill" title="Auto-swapping between Formal & NCC until chosen. Click any photo button to choose!">
+                  <span class="pulse-dot"></span>
+                  <span class="auto-swap-label" id="auto-swap-label">
+                    <i class="fa-solid fa-arrows-rotate fa-spin"></i> Auto-Swapping (Formal ↔ NCC)
+                  </span>
+                </span>
+              </div>
+              <div class="photo-switcher-bar" id="photo-switcher-bar">
+                <button class="photo-switch-btn active" data-id="ncc" data-src="assets/profile.jpg" data-pos="center 65%" data-caption="Parv Jain - National Cadet Corps (NCC) Senior Cadet Ceremony" id="btn-photo-ncc">
+                  <i class="fa-solid fa-medal"></i> NCC Cadet
+                </button>
+                <button class="photo-switch-btn" data-id="formal" data-src="assets/profile_formal.jpg" data-pos="top center" data-caption="Parv Jain - Professional Studio Portrait" id="btn-photo-formal">
+                  <i class="fa-solid fa-user-tie"></i> Formal
+                </button>
+                <button class="photo-switch-btn" data-id="studio" data-src="assets/profile_white_bg.png" data-pos="center 20%" data-caption="Parv Jain - Clean Studio Portrait (White BG)" id="btn-photo-studio">
+                  <i class="fa-solid fa-id-badge"></i> Studio
+                </button>
+              </div>
             </div>
 
             <!-- Floating badges around photo -->
@@ -328,7 +341,7 @@
                 <div class="edu-content">
                   <div class="edu-header">
                     <h4 class="edu-degree">B.Tech – Computer Science & Engineering (IoT)</h4>
-                    <span class="edu-years highlight-batch"><i class="fa-solid fa-graduation-cap"></i> Batch 2022 – 2027</span>
+                    <span class="edu-years highlight-batch"><i class="fa-solid fa-graduation-cap"></i> Batch 2023 – 2027</span>
                   </div>
                   <p class="edu-field">Specialization: Internet of Things, Cyber Security & Blockchain Technology</p>
                   <p class="edu-college"><i class="fa-solid fa-building-columns"></i> Gyan Ganga Institute of Science and Technology, Jabalpur</p>
@@ -890,7 +903,7 @@
                 Secured competitive campus placement for the prestigious Ninja Developer Profile through rigorous programming, algorithmic problem-solving, and technical interviews. Aiming higher and actively expanding skills in computer vision, enterprise networking, and distributed systems to target top product engineering and dream companies in 4th year!
               </p>
               <div class="ambition-tag">
-                <i class="fa-solid fa-rocket"></i> Aiming for Dream Product Roles in 4th Year (Batch 2022–2027)
+                <i class="fa-solid fa-rocket"></i> Aiming for Dream Product Roles in 4th Year (Batch 2023–2027)
               </div>
             </div>
             <div class="cert-card-footer">
@@ -1380,15 +1393,18 @@
         <div class="contact-grid">
           <!-- Contact Direct Channels -->
           <div class="contact-channels">
-            <div class="channel-card glass-card">
-              <div class="channel-icon">
+            <div class="channel-card glass-card gmail-featured-card">
+              <div class="channel-icon gmail-icon">
                 <i class="fa-solid fa-envelope"></i>
               </div>
               <div class="channel-info">
-                <h4>Email Address</h4>
-                <a href="mailto:parvjain123789@gmail.com" class="channel-link">parvjain123789@gmail.com</a>
+                <div class="channel-label-row">
+                  <h4>Email Address</h4>
+                  <span class="gmail-live-badge"><span class="pulse-dot"></span> Active</span>
+                </div>
+                <a href="mailto:parvjain123789@gmail.com" class="channel-link highlighted-email">parvjain123789@gmail.com</a>
               </div>
-              <button class="copy-btn" data-copy="parvjain123789@gmail.com" title="Copy Email">
+              <button class="copy-btn highlighted-copy" data-copy="parvjain123789@gmail.com" title="Copy Email">
                 <i class="fa-regular fa-copy"></i>
               </button>
             </div>
@@ -1604,7 +1620,7 @@
       <div class="modal-header">
         <span class="modal-badge"><i class="fa-regular fa-file-pdf"></i> Resume & Credentials</span>
         <h3 class="modal-title">Parv Jain - Curriculum Vitae</h3>
-        <p class="modal-subtitle">B.Tech CSE (IoT) • Batch 2022–2027 • TCS Ninja Select • Open to Work</p>
+        <p class="modal-subtitle">B.Tech CSE (IoT) • Batch 2023–2027 • TCS Ninja Select • Open to Work</p>
       </div>
 
       <div class="modal-body resume-modal-body">
@@ -1640,7 +1656,7 @@
               <p class="r-headline">CS-IoT Undergraduate at RGPV • C++ &amp; React.js Developer • Cloud &amp; AI Solutions Enthusiast • TCS Ninja Placed</p>
               <div class="r-contact-line">
                 <span><i class="fa-solid fa-phone"></i> +91 7389414941</span>
-                <span><i class="fa-solid fa-envelope"></i> parvjain123789@gmail.com</span>
+                <span class="r-gmail-highlight"><i class="fa-solid fa-envelope"></i> parvjain123789@gmail.com</span>
                 <span><i class="fa-solid fa-location-dot"></i> 311 Sathiya Kuan, Sarafa Ward, Jabalpur, MP, India</span>
               </div>
               <div class="r-links-line">
@@ -1657,7 +1673,7 @@
           <div class="r-section">
             <h2 class="r-section-title">PROFESSIONAL SUMMARY</h2>
             <p class="r-text">
-              CS-IoT undergraduate at <strong>RGPV Bhopal (Gyan Ganga Institute, GGITS '27)</strong> focused on building strong problem-solving skills through <strong>Data Structures &amp; Algorithms, C++, and React.js</strong>. Uncompromising belief in <em>execution over excuses</em> — disciplined, consistent, and calm under high pressure, forged through personal fitness training. Strengthening core computer science pillars: <strong>DSA, Object-Oriented Programming (OOP), Operating Systems, DBMS, and Computer Networks</strong> while mastering resilient cloud architectures. Placed at TCS Ninja; actively preparing for top-tier product engineering roles in final year (Batch 2022–2027).
+              CS-IoT undergraduate at <strong>RGPV Bhopal (Gyan Ganga Institute, GGITS '27)</strong> focused on building strong problem-solving skills through <strong>Data Structures &amp; Algorithms, C++, and React.js</strong>. Uncompromising belief in <em>execution over excuses</em> — disciplined, consistent, and calm under high pressure, forged through personal fitness training. Strengthening core computer science pillars: <strong>DSA, Object-Oriented Programming (OOP), Operating Systems, DBMS, and Computer Networks</strong> while mastering resilient cloud architectures. Placed at TCS Ninja; actively preparing for top-tier product engineering roles in final year (Batch 2023–2027).
             </p>
           </div>
 
@@ -1666,7 +1682,7 @@
             <div class="r-edu-block">
               <div class="r-subhead">
                 <strong>Gyan Ganga Institute of Technology and Science, Jabalpur</strong>
-                <span class="r-date highlight-tag">Batch 2022 – 2027</span>
+                <span class="r-date highlight-tag">Batch 2023 – 2027</span>
               </div>
               <div class="r-subfield">B.Tech – Computer Science & Engineering (Internet of Things, Cyber Security & Blockchain Technology) • Affiliated to RGPV Bhopal</div>
               <div class="r-subscore"><strong>Cumulative GPA: 7.32 / 10.00</strong> (5 of 8 Semesters Completed • 114 Credits Earned)</div>
@@ -1757,7 +1773,7 @@
           <div class="r-section">
             <h2 class="r-section-title">CERTIFICATIONS &amp; ACHIEVEMENTS</h2>
             <ul class="r-bullets">
-              <li><strong>Campus Placement Milestone:</strong> Placed in Tata Consultancy Services (TCS) for the competitive Ninja Developer Profile (Assistant System Engineer-Trainee, Offer Ref: TCSL/CT20265023693). Actively preparing for top-tier product engineering roles in final year (Batch 2022–2027).</li>
+              <li><strong>Campus Placement Milestone:</strong> Placed in Tata Consultancy Services (TCS) for the competitive Ninja Developer Profile (Assistant System Engineer-Trainee, Offer Ref: TCSL/CT20265023693). Actively preparing for top-tier product engineering roles in final year (Batch 2023–2027).</li>
               <li><strong>AWS Certified:</strong> AWS Certified Solutions Architect – Associate (Amazon Web Services).</li>
               <li><strong>AWS Certified:</strong> AWS Certified AI Practitioner (AIF-C01 English, Amazon Web Services).</li>
               <li><strong>AWS Academy Graduate:</strong> Cloud Foundations (20 Hours Completed, Credly Verified Digital Badge).</li>
